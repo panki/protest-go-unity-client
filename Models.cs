@@ -38,5 +38,15 @@ namespace ProtestGoClient
             set { createdAt = value.ToString(); }
         }
     }
+
+    public class RecordNicknameRequest
+    {
+        public string nickname;
+    }
+
+    public class RecordSuccessResponse
+    {
+        public bool success;
+    }
 }
 

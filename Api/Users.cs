@@ -14,6 +14,20 @@ namespace ProtestGoClient
             {
                 return get<RecordMeResponse>("/users/me");
             }
+
+            public static IPromise<bool> CheckNickname(string nickname)
+            {
+                RecordNicknameRequest req = new RecordNicknameRequest { nickname = nickname };
+                return post<RecordSuccessResponse>("/users/checkNickname", req)
+                .Then(res => res.success);
+            }
+
+            public static IPromise<bool> SetNickname(string nickname)
+            {
+                RecordNicknameRequest req = new RecordNicknameRequest { nickname = nickname };
+                return put<RecordSuccessResponse>("/users/setNickname", req)
+                .Then(res => res.success);
+            }
         }
     }
 }

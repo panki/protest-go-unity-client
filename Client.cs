@@ -44,6 +44,13 @@ namespace ProtestGoClient
             .Catch(err => throw mapError(err));
         }
 
+        private static IPromise<T> put<T>(string endpoint, object body)
+        {
+            RequestHelper request = buildRequest(endpoint, body);
+            return RestClient.Put<T>(request)
+            .Catch(err => throw mapError(err));
+        }
+
         private static void log(string msg, object data = null)
         {
             if (!Debug) return;

@@ -41,7 +41,7 @@ Put this line to the `Packages/manifest.json`
 ```json
 {
   "dependencies": {
-      "com.protest-go.protest-go-client": "ssh://git@github.com/panki/protest-go-unity-client.git#v0.0.1"
+      "com.protest-go.protest-go-client": "https://github.com/panki/protest-go-unity-client.git#v0.0.1"
   }
 ```
 
@@ -53,7 +53,7 @@ Change version tag in `Packages/manifest.json` to the new version, for example v
 ```json
 {
   "dependencies": {
-      "com.protest-go.protest-go-client": "ssh://git@github.com/panki/protest-go-unity-client.git#v0.0.2"
+      "com.protest-go.protest-go-client": "https://github.com/panki/protest-go-unity-client.git#v0.0.2"
   }
 ```
 
