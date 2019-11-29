@@ -12,7 +12,10 @@ namespace ProtestGoClient
 
     public class RecordInitRequest { }
 
-    public class RecordInitResponse { }
+    public class RecordInitResponse
+    {
+        public string resourcesUrl;
+    }
 
     public class RecordRegisterRequest
     {

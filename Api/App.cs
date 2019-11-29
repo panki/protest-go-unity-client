@@ -21,11 +21,11 @@ namespace ProtestGoClient
             */
             public static IPromise<string> Register()
             {
-                return post<RecordRegisterResponse>("/register", new RecordRegisterRequest { unityId = UnityId })
+                return post<RecordRegisterResponse>("/register", new RecordRegisterRequest { unityId = deviceId })
                 .Then(res =>
                 {
-                    AccessToken = res.token;
-                    return AccessToken;
+                    accessToken = res.token;
+                    return accessToken;
                 });
             }
         }

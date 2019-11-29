@@ -1,6 +1,8 @@
 # Protest GO: Unity client library
 
-Implements rest api client for protest-go backed
+Implements rest api client for protest-go backed.
+
+**Important:** You must have valid AppKey and AppSecret to use this api (please contact to the authors).
 
 ## API
 
@@ -10,10 +12,18 @@ Implements rest api client for protest-go backed
 using ProtestGoClient;
 ```
 
-Initialize client with `UnityId` and previously saved `AccessToken` (if it was saved before):
+### Initialize client with `AppKey` and `AppSecret`:
+
 ```csharp
-Client.UnityId = unityId; // required
-Client.AccessToken = token; // optional
+Client.Init(appKey, appSecret)            // mandatory
+Client.SetBaseUrl("http://example.com/")  // optional, defaul https://pgo.panki.ru/
+Client.SetDebug(true)                     // optional, default false
+```
+
+### Authorize user by setting `accessToken` if it was previously saved:
+
+```csharp
+Client.SetAccessToken(token)
 ```
 
 ### Make calls:
@@ -26,7 +36,6 @@ Client.App
     .Catch(err => { ... }) // Handle errors
 ```
 
-
 ```csharp
 // Register anonymous user
 Client.App
@@ -38,6 +47,7 @@ Client.App
 ## How to install
 
 Put this line to the `Packages/manifest.json`
+
 ```json
 {
   "dependencies": {
@@ -46,6 +56,7 @@ Put this line to the `Packages/manifest.json`
 ```
 
 Package manager will checkout source code and install package.
+
 ## How to update
 
 Change version tag in `Packages/manifest.json` to the new version, for example v0.0.1 to v0.0.2:
@@ -73,5 +84,3 @@ Package manager will update package to the specified version. If for some reason
 ```
 
 After that everything should be ok)
-
-

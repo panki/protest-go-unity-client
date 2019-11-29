@@ -2,31 +2,83 @@
 using RSG;
 using UnityEngine;
 using System.Collections.Generic;
+using System.Text;
+using System.Security.Cryptography;
 
 namespace ProtestGoClient
 {
 
     public static partial class Client
     {
-        // Base backend URL
-        public static string BaseUrl = "https://pgo.panki.ru/";
-        public static string UnityId;
-        public static string AccessToken;
-        public static bool Debug = false;
+
+        // Settings
+        private static string baseUrl = "https://pgo.panki.ru/";
+        private static bool debug = false;
+
+        // App
+        private static string appKey;
+        private static string appSecret;
+
+        // User
+        private static string accessToken;
+        private static string deviceId = SystemInfo.deviceUniqueIdentifier;
+
+        public static void Init2(string key, string secret)
+        {
+            appKey = key;
+            appSecret = secret;
+        }
+
+        public static void SetAccessToken(string token)
+        {
+            accessToken = token;
+        }
+
+        public static void SetBaseUrl(string url)
+        {
+            baseUrl = url;
+        }
+
+        public static void SetDebug(bool enabled)
+        {
+            debug = enabled;
+        }
+
+        private static string calcSign(object body)
+        {
+            MD5 md5 = new MD5CryptoServiceProvider();
+
+            string data = JsonUtility.ToJson(body) + appSecret;
+            byte[] input = Encoding.Default.GetBytes(data);
+            byte[] result = md5.ComputeHash(input);
+
+            StringBuilder sBuilder = new StringBuilder();
+            for (int i = 0; i < result.Length; i++)
+            {
+                sBuilder.Append(result[i].ToString("x2"));
+            }
+            return sBuilder.ToString();
+        }
 
         private static RequestHelper buildRequest(string endpoint, object body = null)
         {
             string path = string.Join("/", endpoint).TrimEnd('/').TrimStart('/').Replace("//", "/");
+            string signature = calcSign(body);
+
+            Dictionary<string, string> headers = new Dictionary<string, string> {
+                { "Authorization", "Bearer " + accessToken },
+                { "X-Auth", appKey + ":" + signature }
+            };
+
             RequestHelper req = new RequestHelper
             {
-                Uri = BaseUrl.TrimEnd('/') + '/' + path,
-                Headers = new Dictionary<string, string> {
-                        { "Authorization", "Bearer " + AccessToken }
-                    },
+                Uri = baseUrl.TrimEnd('/') + '/' + path,
+                Headers = headers,
                 Body = body,
-                EnableDebug = Debug
+                EnableDebug = debug
             };
-            log("Making request to " + req.Uri, body);
+
+            log("Request to: " + req.Uri, body);
             return req;
         }
 
@@ -53,7 +105,7 @@ namespace ProtestGoClient
 
         private static void log(string msg, object data = null)
         {
-            if (!Debug) return;
+            if (!debug) return;
             if (data != null)
             {
                 string obj = JsonUtility.ToJson(data, true);
