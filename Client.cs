@@ -23,7 +23,7 @@ namespace ProtestGoClient
         private static string accessToken;
         private static string deviceId = SystemInfo.deviceUniqueIdentifier;
 
-        public static void Init2(string key, string secret)
+        public static void Init(string key, string secret)
         {
             appKey = key;
             appSecret = secret;
