@@ -1,0 +1,26 @@
+name: Notify
+
+on:
+  push:
+    branches:
+      - "master"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Setup variables
+        id: vars
+        run: |
+          echo "##[set-output name=version;]$(jq -r .version package.json)"
+
+      - name: Success notification
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_NOTIFICATIONS_TO }}
+          token: ${{ secrets.TELEGRAM_NOTIFICATIONS_TOKEN }}
+          message: "✅ Client *v${{ steps.vars.outputs.version }}* is ready! 🍾🍾🍾"
+          format: markdown
