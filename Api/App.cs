@@ -12,7 +12,7 @@ namespace ProtestGoClient
             */
             public static IPromise<RecordInitResponse> Init()
             {
-                return get<RecordInitResponse>("/init", new RecordInitRequest { });
+                return get<RecordInitResponse>("/init");
             }
 
             /*

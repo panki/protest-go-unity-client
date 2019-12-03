@@ -82,9 +82,9 @@ namespace ProtestGoClient
             return req;
         }
 
-        private static IPromise<T> get<T>(string endpoint, object body = null)
+        private static IPromise<T> get<T>(string endpoint)
         {
-            RequestHelper request = buildRequest(endpoint, body);
+            RequestHelper request = buildRequest(endpoint);
             return RestClient.Get<T>(request)
             .Catch(err => throw mapError(err));
         }
