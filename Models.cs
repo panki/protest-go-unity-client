@@ -37,6 +37,8 @@ namespace ProtestGoClient
         public string id;
         public string nickname;
 
+        public List<RecordAvatarResponse> avatars;
+
         [SerializeField]
         private string createdAt;
 
@@ -75,6 +77,20 @@ namespace ProtestGoClient
     public class RecordPlacesResponse
     {
         public List<RecordPlaceResponse> places;
+    }
+
+    [Serializable]
+    public class RecordAvatarResponse
+    {
+        public uint id;
+        public string symId;
+        public uint type;
+    }
+
+    [Serializable]
+    public class RecordAvatarsResponse
+    {
+        public List<RecordAvatarResponse> avatars;
     }
 }
 
