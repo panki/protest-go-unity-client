@@ -8,7 +8,7 @@ namespace ProtestGoClient
     [Serializable]
     class ErrorResponse
     {
-        public int statusCode;
+        public uint statusCode;
         public string error;
         public string message;
     }
@@ -62,12 +62,12 @@ namespace ProtestGoClient
     [Serializable]
     public class RecordPlaceResponse
     {
-        public int id;
+        public uint id;
         public string symId;
         public float lat;
         public float lon;
-        public int radius;
-        public int modeId;
+        public uint radius;
+        public uint modeId;
 
     }
 
