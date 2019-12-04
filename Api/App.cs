@@ -1,7 +1,35 @@
 using RSG;
+using UnityEngine;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+
 
 namespace ProtestGoClient
 {
+    namespace Req
+    {
+        [Serializable]
+        public class Register
+        {
+            public string unityId;
+        }
+    }
+
+    namespace Res
+    {
+        [Serializable]
+        public class Init
+        {
+            public string resourcesUrl;
+        }
+
+        [Serializable]
+        public class Register
+        {
+            public string token;
+        }
+    }
 
     public static partial class Client
     {
@@ -10,9 +38,9 @@ namespace ProtestGoClient
             /*
             Init - requests init configuration from server
             */
-            public static IPromise<RecordInitResponse> Init()
+            public static IPromise<Res.Init> Init()
             {
-                return get<RecordInitResponse>("/init");
+                return get<Res.Init>("/init");
             }
 
             /*
@@ -21,7 +49,7 @@ namespace ProtestGoClient
             */
             public static IPromise<string> Register()
             {
-                return post<RecordRegisterResponse>("/register", new RecordRegisterRequest { unityId = deviceId })
+                return post<Res.Register>("/register", new Req.Register { unityId = deviceId })
                 .Then(res =>
                 {
                     accessToken = res.token;
@@ -29,7 +57,5 @@ namespace ProtestGoClient
                 });
             }
         }
-
-
     }
 }

@@ -1,6 +1,6 @@
 namespace ProtestGoClient
 {
-    namespace Errors
+    namespace Err
     {
         // Any network connection error
         public class NetworkError : System.Exception

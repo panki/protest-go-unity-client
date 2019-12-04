@@ -1,7 +1,41 @@
 using RSG;
+using UnityEngine;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+
 
 namespace ProtestGoClient
 {
+    namespace Req
+    {
+        [Serializable]
+        public class Nickname
+        {
+            public string nickname;
+        }
+    }
+
+    namespace Res
+    {
+        [Serializable]
+        public class Me
+        {
+            public string id;
+            public string nickname;
+
+            public List<Res.Avatar> avatars;
+
+            [SerializeField]
+            private string createdAt;
+
+            public DateTime createdDt
+            {
+                get { return DateTime.Parse(createdAt); }
+                set { createdAt = value.ToString(); }
+            }
+        }
+    }
 
     public static partial class Client
     {
@@ -10,22 +44,22 @@ namespace ProtestGoClient
             /*
             Me - requests current user's information.
             */
-            public static IPromise<RecordMeResponse> Me()
+            public static IPromise<Res.Me> Me()
             {
-                return get<RecordMeResponse>("/users/me");
+                return get<Res.Me>("/users/me");
             }
 
             public static IPromise<bool> CheckNickname(string nickname)
             {
-                RecordNicknameRequest req = new RecordNicknameRequest { nickname = nickname };
-                return post<RecordSuccessResponse>("/users/checkNickname", req)
+                Req.Nickname req = new Req.Nickname { nickname = nickname };
+                return post<Res.Success>("/users/checkNickname", req)
                 .Then(res => res.success);
             }
 
             public static IPromise<bool> SetNickname(string nickname)
             {
-                RecordNicknameRequest req = new RecordNicknameRequest { nickname = nickname };
-                return put<RecordSuccessResponse>("/users/setNickname", req)
+                Req.Nickname req = new Req.Nickname { nickname = nickname };
+                return put<Res.Success>("/users/setNickname", req)
                 .Then(res => res.success);
             }
         }

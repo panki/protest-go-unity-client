@@ -120,19 +120,19 @@ namespace ProtestGoClient
             {
                 RequestException err = (RequestException)e;
 
-                if (err.IsNetworkError) return new Errors.NetworkError(err.Message);
+                if (err.IsNetworkError) return new Err.NetworkError(err.Message);
 
-                ErrorResponse res = JsonUtility.FromJson<ErrorResponse>(err.Response);
+                Res.Error res = JsonUtility.FromJson<Res.Error>(err.Response);
                 log("Error response", res);
 
                 switch (err.StatusCode)
                 {
-                    case 400: return new Errors.InvalidArgumentsError(res.message != "" ? res.message : res.error);
-                    case 401: return new Errors.UnauthorizedError();
-                    case 404: return new Errors.NotFoundError();
-                    case 500: return new Errors.ServerError();
+                    case 400: return new Err.InvalidArgumentsError(res.message != "" ? res.message : res.error);
+                    case 401: return new Err.UnauthorizedError();
+                    case 404: return new Err.NotFoundError();
+                    case 500: return new Err.ServerError();
                 }
-                return new Errors.UnknownError(err.Message);
+                return new Err.UnknownError(err.Message);
             }
             return e;
         }
