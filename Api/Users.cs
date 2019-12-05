@@ -19,12 +19,20 @@ namespace ProtestGoClient
     namespace Res
     {
         [Serializable]
+        public class UserAvatar
+        {
+            public string id;
+            public uint avatarId;
+            public string protestId;
+            public string nickname;
+        }
+        [Serializable]
         public class Me
         {
             public string id;
             public string nickname;
 
-            public List<Res.Avatar> avatars;
+            public List<Res.UserAvatar> avatars;
 
             [SerializeField]
             private string createdAt;

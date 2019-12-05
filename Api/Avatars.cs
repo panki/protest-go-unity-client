@@ -14,7 +14,9 @@ namespace ProtestGoClient
         {
             public uint id;
             public string symId;
-            public uint type;
+            public uint type; // 1 - initial, 2 - onsell
+
+            public string sex; // M - male, F - female
         }
 
         [Serializable]
@@ -30,7 +32,7 @@ namespace ProtestGoClient
             /*
             GetAll - request all avatars on sale
             */
-            public static IPromise<List<Res.Avatar>> GetAllOnSale()
+            public static IPromise<List<Res.Avatar>> QueryAll()
             {
                 return get<Res.Avatars>("/avatars").Then(res => res.avatars);
             }

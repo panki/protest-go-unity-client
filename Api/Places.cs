@@ -35,7 +35,7 @@ namespace ProtestGoClient
             /*
             GetAll - request all places
             */
-            public static IPromise<List<Res.Place>> GetAll()
+            public static IPromise<List<Res.Place>> QueryAll()
             {
                 return get<Res.Places>("/places").Then(res => res.places);
             }
