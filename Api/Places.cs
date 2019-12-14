@@ -18,6 +18,7 @@ namespace ProtestGoClient
             public float lon;
             public uint radius;
             public uint modeId;
+            public string protestId;
 
         }
 
