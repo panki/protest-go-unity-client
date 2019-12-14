@@ -7,7 +7,6 @@ using System.Security.Cryptography;
 
 namespace ProtestGoClient
 {
-
     public static partial class Client
     {
 
@@ -60,7 +59,7 @@ namespace ProtestGoClient
             return sBuilder.ToString();
         }
 
-        private static RequestHelper buildRequest(string endpoint, object body = null)
+        private static RequestHelper buildRequest(string endpoint, object body = null, Dictionary<string, string> args = null)
         {
             string path = string.Join("/", endpoint).TrimEnd('/').TrimStart('/').Replace("//", "/");
             string signature = calcSign(body);
@@ -74,6 +73,7 @@ namespace ProtestGoClient
             {
                 Uri = baseUrl.TrimEnd('/') + '/' + path,
                 Headers = headers,
+                Params = args,
                 Body = body,
                 EnableDebug = debug
             };
@@ -82,9 +82,9 @@ namespace ProtestGoClient
             return req;
         }
 
-        private static IPromise<T> get<T>(string endpoint)
+        private static IPromise<T> get<T>(string endpoint, Dictionary<string, string> args = null)
         {
-            RequestHelper request = buildRequest(endpoint);
+            RequestHelper request = buildRequest(endpoint, null, args);
             return RestClient.Get<T>(request)
             .Catch(err => throw mapError(err));
         }
