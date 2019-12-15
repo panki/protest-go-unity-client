@@ -22,6 +22,7 @@ namespace ProtestGoClient
         public class Init
         {
             public string resourcesUrl;
+            public List<uint> allowedProtestTypes;
         }
 
         [Serializable]
