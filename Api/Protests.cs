@@ -92,6 +92,7 @@ namespace ProtestGoClient
         public class CreateProtest
         {
             public uint placeId;
+            public uint protestTypeId;
             public string userAvatarId;
             public string bannerId;
             public List<string> bannerWords;
@@ -132,6 +133,7 @@ namespace ProtestGoClient
 
             public static IPromise<Res.Protest> CreateProtest(
                 uint placeId,
+                uint protestTypeId,
                 string userAvatarId,
                 string bannerId,
                 List<string> bannerWords,
@@ -141,6 +143,7 @@ namespace ProtestGoClient
                 Req.CreateProtest req = new Req.CreateProtest
                 {
                     placeId = placeId,
+                    protestTypeId = protestTypeId,
                     userAvatarId = userAvatarId,
                     bannerId = bannerId,
                     bannerWords = bannerWords,
