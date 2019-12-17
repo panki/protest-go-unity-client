@@ -56,6 +56,7 @@ namespace ProtestGoClient
             public string userAvatarId;
             public string bannerId;
             public string bannerText;
+            public uint status;
 
             public UserAvatar userAvatar;
 
@@ -63,12 +64,21 @@ namespace ProtestGoClient
             [SerializeField]
             private string joinedAt;
 
+            [SerializeField]
+            private string leavedAt;
+
             // calculated
 
             public DateTime joinedDt
             {
                 get { return DateTime.Parse(joinedAt).ToFileTimeUtc(); }
                 set { joinedAt = DateTime.FromFileTimeUtc(value).ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"); }
+            }
+
+            public DateTime leavedDt
+            {
+                get { return DateTime.Parse(leavedAt).ToFileTimeUtc(); }
+                set { leavedAt = DateTime.FromFileTimeUtc(value).ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"); }
             }
 
         }
@@ -106,6 +116,11 @@ namespace ProtestGoClient
             public string userAvatarId;
             public string bannerId;
             public List<string> bannerWords;
+        }
+
+        public class LeaveProtest
+        {
+            public string userAvatarId;
         }
     }
 
@@ -166,6 +181,17 @@ namespace ProtestGoClient
                     bannerWords = bannerWords,
                 };
                 return post<Res.Participant>("/protests/" + protestId + "/join", req);
+            }
+
+            public static IPromise<Res.Participant> LeaveProtest(
+                string protestId,
+                string userAvatarId)
+            {
+                Req.LeaveProtest req = new Req.LeaveProtest
+                {
+                    userAvatarId = userAvatarId,
+                };
+                return post<Res.Participant>("/protests/" + protestId + "/leave", req);
             }
         }
     }
