@@ -38,10 +38,10 @@ namespace ProtestGoClient
             [SerializeField]
             private string createdAt;
 
-            public DateTime createdDt
+            public long createdDt
             {
-                get { return DateTime.Parse(createdAt).ToUniversalTime(); }
-                set { createdAt = value.ToString(); }
+                get { return DateTime.Parse(createdAt).ToFileTimeUtc(); }
+                set { createdAt = DateTime.FromFileTimeUtc(value).ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"); }
             }
         }
     }

@@ -31,14 +31,14 @@ namespace ProtestGoClient
 
             public DateTime startedDt
             {
-                get { return DateTime.Parse(startedAt).ToUniversalTime(); }
-                set { startedAt = value.ToString(); }
+                get { return DateTime.Parse(startedAt).ToFileTimeUtc(); }
+                set { startedAt = DateTime.FromFileTimeUtc(value).ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"); }
             }
 
             public DateTime finishesDt
             {
-                get { return DateTime.Parse(finishesAt).ToUniversalTime(); }
-                set { finishesAt = value.ToString(); }
+                get { return DateTime.Parse(finishesAt).ToFileTimeUtc(); }
+                set { finishesAt = DateTime.FromFileTimeUtc(value).ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"); }
             }
         }
 
@@ -67,8 +67,8 @@ namespace ProtestGoClient
 
             public DateTime joinedDt
             {
-                get { return DateTime.Parse(joinedAt).ToUniversalTime(); }
-                set { joinedAt = value.ToString(); }
+                get { return DateTime.Parse(joinedAt).ToFileTimeUtc(); }
+                set { joinedAt = DateTime.FromFileTimeUtc(value).ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"); }
             }
 
         }
