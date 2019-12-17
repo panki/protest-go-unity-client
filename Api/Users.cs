@@ -25,6 +25,8 @@ namespace ProtestGoClient
             public uint avatarId;
             public string protestId;
             public string nickname;
+            public string userNickname;
+            public string protestId;
         }
         [Serializable]
         public class Me
