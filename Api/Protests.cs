@@ -31,13 +31,13 @@ namespace ProtestGoClient
 
             public DateTime startedDt
             {
-                get { return DateTime.Parse(startedAt); }
+                get { return DateTime.Parse(startedAt).ToUniversalTime(); }
                 set { startedAt = value.ToString(); }
             }
 
             public DateTime finishesDt
             {
-                get { return DateTime.Parse(finishesAt); }
+                get { return DateTime.Parse(finishesAt).ToUniversalTime(); }
                 set { finishesAt = value.ToString(); }
             }
         }
@@ -67,7 +67,7 @@ namespace ProtestGoClient
 
             public DateTime joinedDt
             {
-                get { return DateTime.Parse(joinedAt); }
+                get { return DateTime.Parse(joinedAt).ToUniversalTime(); }
                 set { joinedAt = value.ToString(); }
             }
 

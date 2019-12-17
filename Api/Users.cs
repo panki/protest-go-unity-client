@@ -26,7 +26,6 @@ namespace ProtestGoClient
             public string protestId;
             public string nickname;
             public string userNickname;
-            public string protestId;
         }
         [Serializable]
         public class Me
@@ -41,7 +40,7 @@ namespace ProtestGoClient
 
             public DateTime createdDt
             {
-                get { return DateTime.Parse(createdAt); }
+                get { return DateTime.Parse(createdAt).ToUniversalTime(); }
                 set { createdAt = value.ToString(); }
             }
         }
