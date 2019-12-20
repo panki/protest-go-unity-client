@@ -118,6 +118,18 @@ namespace ProtestGoClient
             return participants;
         }
 
+        public Res.Place Place(Res.Place place)
+        {
+            fillPlace(place);
+            return place;
+        }
+
+        public List<Res.Place> Places(List<Res.Place> places)
+        {
+            fillPlaces(places);
+            return places;
+        }
+
         private void fillUser(Res.User user)
         {
             fillUsersAvatars(user.userAvatars);
@@ -168,6 +180,19 @@ namespace ProtestGoClient
         private void fillParticipants(List<Res.Participant> participants)
         {
             participants.ForEach(p => fillParticipant(p));
+        }
+
+        private void fillPlace(Res.Place p)
+        {
+            if (p.protest == null && protestsMap.ContainsKey(p.protestId))
+            {
+                p.protest = protestsMap[p.protestId];
+            }
+        }
+
+        private void fillPlaces(List<Res.Place> places)
+        {
+            places.ForEach(p => fillPlace(p));
         }
     }
 }

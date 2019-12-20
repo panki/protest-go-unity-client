@@ -20,12 +20,23 @@ namespace ProtestGoClient
             public uint modeId;
             public string protestId;
 
+            [System.NonSerialized]
+            public Protest protest;
+
         }
 
         [Serializable]
-        public class Places
+        class PlacesResponse
         {
-            public List<Place> places;
+            public List<Place> places = null;
+            public Graph graph = null;
+        }
+
+        [Serializable]
+        class PlaceResponse
+        {
+            public Place place = null;
+            public Graph graph = null;
         }
     }
 
@@ -38,7 +49,22 @@ namespace ProtestGoClient
             */
             public static IPromise<List<Res.Place>> QueryAll()
             {
-                return get<Res.Places>("/places").Then(res => res.places);
+                return get<Res.PlacesResponse>("/places")
+                .Then(res =>
+                {
+                    GraphMap g = new GraphMap(res.graph);
+                    return g.Places(res.places);
+                });
+            }
+
+            public static IPromise<Res.Place> GetById(uint id)
+            {
+                return get<Res.PlaceResponse>("/places/" + id.ToString())
+                .Then(res =>
+                {
+                    GraphMap g = new GraphMap(res.graph);
+                    return g.Place(res.place);
+                });
             }
         }
     }
