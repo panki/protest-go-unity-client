@@ -79,7 +79,7 @@ namespace ProtestGoClient
             */
             public static IPromise<string> Create()
             {
-                return post<Res.CreateUser>("/create", new Req.CreateUser { unityId = deviceId })
+                return post<Res.CreateUser>("/users", new Req.CreateUser { unityId = deviceId })
                 .Then(res =>
                 {
                     accessToken = res.token;
