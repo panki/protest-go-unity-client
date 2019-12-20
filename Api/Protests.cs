@@ -27,6 +27,9 @@ namespace ProtestGoClient
             [SerializeField]
             private string finishesAt;
 
+            [System.NonSerialized]
+            public Place place;
+
             // calculated
 
             public long startedDt
@@ -43,12 +46,6 @@ namespace ProtestGoClient
         }
 
         [Serializable]
-        public class Protests
-        {
-            public List<Protest> protests;
-        }
-
-        [Serializable]
         public class Participant
         {
             public string id;
@@ -58,7 +55,11 @@ namespace ProtestGoClient
             public string bannerText;
             public uint status;
 
+            [System.NonSerialized]
             public UserAvatar userAvatar;
+
+            [System.NonSerialized]
+            public Protest protest;
 
 
             [SerializeField]
@@ -84,9 +85,31 @@ namespace ProtestGoClient
         }
 
         [Serializable]
-        public class Participants
+        class ParticipantsResponse
         {
-            public List<Participant> participants;
+            public List<Participant> participants = null;
+            public Graph graph = null;
+        }
+
+        [Serializable]
+        class ParticipantResponse
+        {
+            public Participant participant = null;
+            public Graph graph = null;
+        }
+
+        [Serializable]
+        class ProtestsResponse
+        {
+            public List<Protest> protests = null;
+            public Graph graph = null;
+        }
+
+        [Serializable]
+        class ProtestResponse
+        {
+            public Protest protest = null;
+            public Graph graph = null;
         }
     }
 
@@ -130,20 +153,33 @@ namespace ProtestGoClient
         {
             public static IPromise<Res.Protest> GetById(string id)
             {
-                return get<Res.Protest>("/protests/" + id);
+                return get<Res.ProtestResponse>("/protests/" + id)
+                .Then(res =>
+                {
+                    GraphMap g = new GraphMap(res.graph);
+                    return g.Protest(res.protest);
+                });
             }
 
             public static IPromise<List<Res.Protest>> QueryByIds(List<string> ids)
             {
                 Req.QueryByIds req = new Req.QueryByIds { ids = ids };
-                return post<Res.Protests>("/protests/queryByIds", req)
-                .Then(res => res.protests);
+                return post<Res.ProtestsResponse>("/protests/queryByIds", req)
+                .Then(res =>
+                {
+                    GraphMap g = new GraphMap(res.graph);
+                    return g.Protests(res.protests);
+                });
             }
 
             public static IPromise<List<Res.Participant>> QueryParticipants(string protestId)
             {
-                return get<Res.Participants>("/protests/" + protestId + "/participants")
-                .Then(res => res.participants);
+                return get<Res.ParticipantsResponse>("/protests/" + protestId + "/participants")
+                .Then(res =>
+                {
+                    GraphMap g = new GraphMap(res.graph);
+                    return g.Participants(res.participants);
+                });
             }
 
             public static IPromise<Res.Protest> CreateProtest(
@@ -165,7 +201,12 @@ namespace ProtestGoClient
                     authorized = authorized,
                     duration = duration
                 };
-                return post<Res.Protest>("/protests", req);
+                return post<Res.ProtestResponse>("/protests", req)
+                .Then(res =>
+                {
+                    GraphMap g = new GraphMap(res.graph);
+                    return g.Protest(res.protest);
+                });
             }
 
             public static IPromise<Res.Participant> JoinProtest(
@@ -180,7 +221,12 @@ namespace ProtestGoClient
                     bannerId = bannerId,
                     bannerWords = bannerWords,
                 };
-                return post<Res.Participant>("/protests/" + protestId + "/join", req);
+                return post<Res.ParticipantResponse>("/protests/" + protestId + "/join", req)
+                .Then(res =>
+                {
+                    GraphMap g = new GraphMap(res.graph);
+                    return g.Participant(res.participant);
+                });
             }
 
             public static IPromise<Res.Participant> LeaveProtest(
@@ -191,7 +237,12 @@ namespace ProtestGoClient
                 {
                     userAvatarId = userAvatarId,
                 };
-                return post<Res.Participant>("/protests/" + protestId + "/leave", req);
+                return post<Res.ParticipantResponse>("/protests/" + protestId + "/leave", req)
+                .Then(res =>
+                {
+                    GraphMap g = new GraphMap(res.graph);
+                    return g.Participant(res.participant);
+                });
             }
         }
     }

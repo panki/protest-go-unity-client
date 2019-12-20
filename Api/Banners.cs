@@ -24,6 +24,7 @@ namespace ProtestGoClient
         public class Banners
         {
             public List<Banner> banners;
+            public Graph graph;
         }
     }
 
@@ -38,7 +39,11 @@ namespace ProtestGoClient
                     { "language", language }
                 };
                 return get<Res.Banners>("/banners", args)
-                .Then(res => res.banners);
+                .Then(res =>
+                {
+                    GraphMap g = new GraphMap(res.graph);
+                    return g.Banners(res.banners);
+                });
             }
         }
     }

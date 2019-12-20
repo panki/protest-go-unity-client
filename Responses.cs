@@ -8,9 +8,9 @@ namespace ProtestGoClient.Res
     [Serializable]
     class Error
     {
-        public uint statusCode;
-        public string error;
-        public string message;
+        public uint statusCode = 0;
+        public string error = "";
+        public string message = "";
     }
 
     [Serializable]

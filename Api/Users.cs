@@ -14,10 +14,22 @@ namespace ProtestGoClient
         {
             public string nickname;
         }
+
+        [Serializable]
+        public class CreateUser
+        {
+            public string unityId;
+        }
     }
 
     namespace Res
     {
+        [Serializable]
+        public class CreateUser
+        {
+            public string token;
+        }
+
         [Serializable]
         public class UserAvatar
         {
@@ -26,14 +38,19 @@ namespace ProtestGoClient
             public string protestId;
             public string nickname;
             public string userNickname;
+
+            [System.NonSerialized]
+            public Avatar avatar;
         }
         [Serializable]
-        public class Me
+        public class User
         {
             public string id;
             public string nickname;
 
-            public List<Res.UserAvatar> avatars;
+            public List<Res.UserAvatar> userAvatars;
+
+            public List<Res.Participant> participations;
 
             [SerializeField]
             private string createdAt;
@@ -44,6 +61,13 @@ namespace ProtestGoClient
                 set { createdAt = DateTime.FromFileTimeUtc(value).ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"); }
             }
         }
+
+        [Serializable]
+        public class MeResponse
+        {
+            public User user;
+            public Graph graph;
+        }
     }
 
     public static partial class Client
@@ -51,11 +75,28 @@ namespace ProtestGoClient
         public static class Users
         {
             /*
+            Register - registers new anonymous user,
+            returns access token for future requests.
+            */
+            public static IPromise<string> Create()
+            {
+                return post<Res.CreateUser>("/create", new Req.CreateUser { unityId = deviceId })
+                .Then(res =>
+                {
+                    accessToken = res.token;
+                    return accessToken;
+                });
+            }
+            /*
             Me - requests current user's information.
             */
-            public static IPromise<Res.Me> Me()
+            public static IPromise<Res.User> Me()
             {
-                return get<Res.Me>("/users/me");
+                return get<Res.MeResponse>("/users/me").Then(res =>
+                {
+                    GraphMap g = new GraphMap(res.graph);
+                    return g.User(res.user);
+                });
             }
 
             public static IPromise<bool> CheckNickname(string nickname)

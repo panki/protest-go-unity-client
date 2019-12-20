@@ -23,6 +23,7 @@ namespace ProtestGoClient
         public class Avatars
         {
             public List<Avatar> avatars;
+            public Graph graph;
         }
     }
     public static partial class Client
@@ -34,7 +35,11 @@ namespace ProtestGoClient
             */
             public static IPromise<List<Res.Avatar>> QueryAll()
             {
-                return get<Res.Avatars>("/avatars").Then(res => res.avatars);
+                return get<Res.Avatars>("/avatars").Then(res =>
+                {
+                    GraphMap g = new GraphMap(res.graph);
+                    return g.Avatars(res.avatars);
+                });
             }
         }
     }
