@@ -38,14 +38,14 @@ namespace ProtestGoClient
 
             public long startedDt
             {
-                get { return DateTime.Parse(startedAt).ToFileTimeUtc(); }
-                set { startedAt = DateTime.FromFileTimeUtc(value).ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"); }
+                get { return Utils.str2unixtime(startedAt); }
+                set { startedAt = Utils.unixtime2str(value); }
             }
 
             public long finishesDt
             {
-                get { return DateTime.Parse(finishesAt).ToFileTimeUtc(); }
-                set { finishesAt = DateTime.FromFileTimeUtc(value).ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"); }
+                get { return Utils.str2unixtime(finishesAt); }
+                set { finishesAt = Utils.unixtime2str(value); }
             }
         }
 
@@ -76,14 +76,14 @@ namespace ProtestGoClient
 
             public long joinedDt
             {
-                get { return DateTime.Parse(joinedAt).ToFileTimeUtc(); }
-                set { joinedAt = DateTime.FromFileTimeUtc(value).ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"); }
+                get { return Utils.str2unixtime(joinedAt); }
+                set { joinedAt = Utils.unixtime2str(value); }
             }
 
             public long leavedDt
             {
-                get { return DateTime.Parse(leavedAt).ToFileTimeUtc(); }
-                set { leavedAt = DateTime.FromFileTimeUtc(value).ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"); }
+                get { return Utils.str2unixtime(leavedAt); }
+                set { leavedAt = Utils.unixtime2str(value); }
             }
 
         }

@@ -35,4 +35,3 @@ namespace ProtestGoClient.Res
         KICKED = 4,
     }
 }
-

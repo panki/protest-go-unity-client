@@ -56,8 +56,8 @@ namespace ProtestGoClient
 
             public long createdDt
             {
-                get { return DateTime.Parse(createdAt).ToFileTimeUtc(); }
-                set { createdAt = DateTime.FromFileTimeUtc(value).ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"); }
+                get { return Utils.str2unixtime(createdAt); }
+                set { createdAt = Utils.unixtime2str(value); }
             }
         }
 
