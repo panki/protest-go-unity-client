@@ -35,7 +35,6 @@ namespace ProtestGoClient
         {
             public string id;
             public uint avatarId;
-            public string protestId;
             public string nickname;
             public string userNickname;
 
