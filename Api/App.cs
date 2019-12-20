@@ -14,6 +14,7 @@ namespace ProtestGoClient
         {
             public string resourcesUrl;
             public List<uint> allowedProtestTypes;
+            public uint maxProtestDuration;
         }
     }
 
