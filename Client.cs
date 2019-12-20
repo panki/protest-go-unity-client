@@ -89,14 +89,14 @@ namespace ProtestGoClient
             .Catch(err => throw mapError(err));
         }
 
-        private static IPromise<T> post<T>(string endpoint, object body)
+        private static IPromise<T> post<T>(string endpoint, object body = null)
         {
             RequestHelper request = buildRequest(endpoint, body);
             return RestClient.Post<T>(request)
             .Catch(err => throw mapError(err));
         }
 
-        private static IPromise<T> put<T>(string endpoint, object body)
+        private static IPromise<T> put<T>(string endpoint, object body = null)
         {
             RequestHelper request = buildRequest(endpoint, body);
             return RestClient.Put<T>(request)

@@ -18,8 +18,12 @@ namespace ProtestGoClient
             public uint protestTypeId;
             public string organizerId;
             public uint participantsCount;
+            public uint maxParticipantsCount;
+            public uint totalParticipantsCount;
             public bool authorized;
             public bool finished;
+            public ProtestStatus status;
+
 
             [SerializeField]
             private string startedAt;
@@ -53,7 +57,7 @@ namespace ProtestGoClient
             public string userAvatarId;
             public string bannerId;
             public string bannerText;
-            public uint status;
+            public ParticipantStatus status;
 
             [System.NonSerialized]
             public UserAvatar userAvatar;
@@ -242,6 +246,17 @@ namespace ProtestGoClient
                 {
                     GraphMap g = new GraphMap(res.graph);
                     return g.Participant(res.participant);
+                });
+            }
+
+            public static IPromise<Res.Protest> DisperseProtest(
+                string protestId)
+            {
+                return post<Res.ProtestResponse>("/protests/" + protestId + "/disperse")
+                .Then(res =>
+                {
+                    GraphMap g = new GraphMap(res.graph);
+                    return g.Protest(res.protest);
                 });
             }
         }

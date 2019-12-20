@@ -18,5 +18,21 @@ namespace ProtestGoClient.Res
     {
         public bool success;
     }
+
+    public enum ProtestStatus : uint
+    {
+        ACTIVE = 1,
+        LEAVED = 2,
+        EXPIRED = 3,
+        DISPERSED = 4,
+    }
+
+    public enum ParticipantStatus : uint
+    {
+        ACTIVE = 1,
+        LEAVED = 2,
+        ARRESTED = 3,
+        KICKED = 4,
+    }
 }
 
