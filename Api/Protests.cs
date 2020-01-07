@@ -31,6 +31,12 @@ namespace ProtestGoClient
             [SerializeField]
             private string finishesAt;
 
+            [SerializeField]
+            private string authorizationFinishesAt;
+
+            [SerializeField]
+            private string finishedAt;
+
             [System.NonSerialized]
             public Place place;
 
@@ -46,6 +52,18 @@ namespace ProtestGoClient
             {
                 get { return Utils.str2unixtime(finishesAt); }
                 set { finishesAt = Utils.unixtime2str(value); }
+            }
+
+            public long authorizationFinishesDt
+            {
+                get { return Utils.str2unixtime(authorizationFinishesAt); }
+                set { authorizationFinishesAt = Utils.unixtime2str(value); }
+            }
+
+            public long finishedDt
+            {
+                get { return Utils.str2unixtime(finishedAt); }
+                set { finishedAt = Utils.unixtime2str(value); }
             }
         }
 
@@ -133,7 +151,6 @@ namespace ProtestGoClient
             public string userAvatarId;
             public string bannerId;
             public List<string> bannerWords;
-            public bool authorized;
             public uint duration; // in minutes
         }
 
@@ -192,7 +209,6 @@ namespace ProtestGoClient
                 string userAvatarId,
                 string bannerId,
                 List<string> bannerWords,
-                bool authorized,
                 uint duration)
             {
                 Req.CreateProtest req = new Req.CreateProtest
@@ -202,7 +218,6 @@ namespace ProtestGoClient
                     userAvatarId = userAvatarId,
                     bannerId = bannerId,
                     bannerWords = bannerWords,
-                    authorized = authorized,
                     duration = duration
                 };
                 return post<Res.ProtestResponse>("/protests", req)
