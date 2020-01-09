@@ -19,9 +19,13 @@ namespace ProtestGoClient
             public uint radius;
             public uint modeId;
             public string protestId;
+            public string leafletId;
 
             [System.NonSerialized]
             public Protest protest;
+
+            [System.NonSerialized]
+            public Leaflet leaflet;
 
         }
 

@@ -34,4 +34,18 @@ namespace ProtestGoClient.Res
         ARRESTED = 3,
         KICKED = 4,
     }
+
+    public enum LeafletStatus : uint
+    {
+        ACTIVE = 1,
+        EXPIRED = 2,
+        DESTROYED = 3,
+    }
+
+    public enum SignatoryStatus : uint
+    {
+        ACTIVE = 1,
+        EXPIRED = 2,
+        DESTROYED = 3,
+    }
 }

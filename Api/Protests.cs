@@ -138,12 +138,6 @@ namespace ProtestGoClient
     namespace Req
     {
         [Serializable]
-        public class QueryByIds
-        {
-            public List<string> ids;
-        }
-
-        [Serializable]
         public class CreateProtest
         {
             public uint placeId;

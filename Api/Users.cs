@@ -50,6 +50,7 @@ namespace ProtestGoClient
             public List<Res.UserAvatar> userAvatars;
 
             public List<Res.Participant> participations;
+            public List<Res.Signatory> signatures;
 
             [SerializeField]
             private string createdAt;

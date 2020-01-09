@@ -13,6 +13,7 @@ namespace ProtestGoClient
         public class Graph
         {
             public List<Protest> protests;
+            public List<Leaflet> leaflets;
             public List<User> users;
             public List<UserAvatar> userAvatars;
             public List<Place> places;
@@ -23,6 +24,7 @@ namespace ProtestGoClient
     class GraphMap
     {
         private Dictionary<string, Res.Protest> protestsMap;
+        private Dictionary<string, Res.Leaflet> leafletsMap;
         private Dictionary<string, Res.User> usersMap;
         private Dictionary<string, Res.UserAvatar> userAvatarsMap;
         private Dictionary<uint, Res.Place> placesMap;
@@ -34,6 +36,12 @@ namespace ProtestGoClient
             g.protests.ForEach(p =>
             {
                 protestsMap[p.id] = p;
+            });
+
+            leafletsMap = new Dictionary<string, Res.Leaflet>();
+            g.leaflets.ForEach(l =>
+            {
+                leafletsMap[l.id] = l;
             });
 
             usersMap = new Dictionary<string, Res.User>();
@@ -106,6 +114,18 @@ namespace ProtestGoClient
             return protests;
         }
 
+        public Res.Leaflet Leaflet(Res.Leaflet leaflet)
+        {
+            fillLeaflet(leaflet);
+            return leaflet;
+        }
+
+        public List<Res.Leaflet> Leaflets(List<Res.Leaflet> leaflets)
+        {
+            fillLeaflets(leaflets);
+            return leaflets;
+        }
+
         public Res.Participant Participant(Res.Participant participant)
         {
             fillParticipant(participant);
@@ -116,6 +136,18 @@ namespace ProtestGoClient
         {
             fillParticipants(participants);
             return participants;
+        }
+
+        public Res.Signatory Signatory(Res.Signatory signatory)
+        {
+            fillSignatory(signatory);
+            return signatory;
+        }
+
+        public List<Res.Signatory> Signatories(List<Res.Signatory> signatories)
+        {
+            fillSignatories(signatories);
+            return signatories;
         }
 
         public Res.Place Place(Res.Place place)
@@ -134,6 +166,7 @@ namespace ProtestGoClient
         {
             fillUsersAvatars(user.userAvatars);
             fillParticipants(user.participations);
+            fillSignatories(user.signatures);
         }
 
         private void fillUsers(List<Res.User> users)
@@ -164,6 +197,18 @@ namespace ProtestGoClient
             protests.ForEach(p => fillProtest(p));
         }
 
+        private void fillLeaflet(Res.Leaflet l)
+        {
+            if (l.place == null && placesMap.ContainsKey(l.placeId))
+                l.place = placesMap[l.placeId];
+
+        }
+
+        private void fillLeaflets(List<Res.Leaflet> leaflets)
+        {
+            leaflets.ForEach(l => fillLeaflet(l));
+        }
+
         private void fillParticipant(Res.Participant p)
         {
             if (p.protest == null && protestsMap.ContainsKey(p.protestId))
@@ -182,11 +227,28 @@ namespace ProtestGoClient
             participants.ForEach(p => fillParticipant(p));
         }
 
+        private void fillSignatory(Res.Signatory s)
+        {
+            if (s.leaflet == null && leafletsMap.ContainsKey(s.leafletId))
+            {
+                s.leaflet = leafletsMap[s.leafletId];
+            }
+        }
+
+        private void fillSignatories(List<Res.Signatory> signatories)
+        {
+            signatories.ForEach(s => fillSignatory(s));
+        }
+
         private void fillPlace(Res.Place p)
         {
             if (p.protest == null && protestsMap.ContainsKey(p.protestId))
             {
                 p.protest = protestsMap[p.protestId];
+            }
+            if (p.leaflet == null && leafletsMap.ContainsKey(p.leafletId))
+            {
+                p.leaflet = leafletsMap[p.leafletId];
             }
         }
 
