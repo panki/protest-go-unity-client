@@ -14,7 +14,6 @@ namespace ProtestGoClient
         {
             public string id;
             public uint placeId;
-            public uint protestModeId;
             public uint protestTypeId;
             public string organizerId;
             public uint participantsCount;
