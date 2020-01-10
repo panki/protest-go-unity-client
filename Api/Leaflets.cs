@@ -61,6 +61,7 @@ namespace ProtestGoClient
         {
             public string id;
             public string leafletId;
+            public string userId;
             public string bannerId;
             public string bannerText;
             public SignatoryStatus status;
