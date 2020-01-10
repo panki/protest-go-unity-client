@@ -189,6 +189,8 @@ namespace ProtestGoClient
         {
             if (p.place == null && placesMap.ContainsKey(p.placeId))
                 p.place = placesMap[p.placeId];
+            if (p.organizer == null && usersMap.ContainsKey(p.organizerId))
+                p.organizer = usersMap[p.organizerId];
 
         }
 
@@ -202,6 +204,8 @@ namespace ProtestGoClient
             if (l.place == null && placesMap.ContainsKey(l.placeId))
                 l.place = placesMap[l.placeId];
 
+            if (l.organizer == null && usersMap.ContainsKey(l.organizerId))
+                l.organizer = usersMap[l.organizerId];
         }
 
         private void fillLeaflets(List<Res.Leaflet> leaflets)
@@ -232,6 +236,10 @@ namespace ProtestGoClient
             if (s.leaflet == null && leafletsMap.ContainsKey(s.leafletId))
             {
                 s.leaflet = leafletsMap[s.leafletId];
+            }
+            if (s.user == null && usersMap.ContainsKey(s.userId))
+            {
+                s.user = usersMap[s.userId];
             }
         }
 

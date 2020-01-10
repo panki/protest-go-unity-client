@@ -39,6 +39,9 @@ namespace ProtestGoClient
             [System.NonSerialized]
             public Place place;
 
+            [System.NonSerialized]
+            public User organizer;
+
             // calculated
 
             public long startedDt
