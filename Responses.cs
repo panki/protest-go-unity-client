@@ -48,4 +48,10 @@ namespace ProtestGoClient.Res
         EXPIRED = 2,
         DESTROYED = 3,
     }
+
+    public static class UserRole
+    {
+        public static string DEVELOPER = "developer";
+    }
+
 }

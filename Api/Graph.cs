@@ -167,6 +167,7 @@ namespace ProtestGoClient
             fillUsersAvatars(user.userAvatars);
             fillParticipants(user.participations);
             fillSignatories(user.signatures);
+            user.isDeveloper = user.roles.Contains(Res.UserRole.DEVELOPER);
         }
 
         private void fillUsers(List<Res.User> users)

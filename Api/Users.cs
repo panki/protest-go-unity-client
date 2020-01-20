@@ -51,6 +51,7 @@ namespace ProtestGoClient
 
             public List<Res.Participant> participations;
             public List<Res.Signatory> signatures;
+            public List<string> roles; // See UserRole
 
             [SerializeField]
             private string createdAt;
@@ -60,6 +61,9 @@ namespace ProtestGoClient
                 get { return Utils.str2unixtime(createdAt); }
                 set { createdAt = Utils.unixtime2str(value); }
             }
+
+            [System.NonSerialized]
+            public bool isDeveloper;
         }
 
         [Serializable]
