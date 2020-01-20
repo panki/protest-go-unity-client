@@ -18,6 +18,10 @@ namespace ProtestGoClient
         private static string appKey;
         private static string appSecret;
 
+        // Geo
+        private static float lat = 0;
+        private static float lon = 0;
+
         // User
         private static string accessToken;
         private static string deviceId = SystemInfo.deviceUniqueIdentifier;
@@ -43,6 +47,12 @@ namespace ProtestGoClient
             debug = enabled;
         }
 
+        public static void SetLocation(float latitude, float longitude)
+        {
+            lat = latitude;
+            lon = longitude;
+        }
+
         private static string calcSign(object body)
         {
             MD5 md5 = new MD5CryptoServiceProvider();
@@ -66,7 +76,8 @@ namespace ProtestGoClient
 
             Dictionary<string, string> headers = new Dictionary<string, string> {
                 { "Authorization", "Bearer " + accessToken },
-                { "X-Auth", appKey + ":" + signature }
+                { "X-Auth", appKey + ":" + signature },
+                { "X-Geolocation", "Position=["+ lat + "," + lon + "]; Signature=" + calcSign(new { lon=lon, lat=lat })+";" }
             };
 
             RequestHelper req = new RequestHelper
