@@ -64,6 +64,7 @@ namespace ProtestGoClient
         {
             public string id;
             public string nickname;
+            public string email;
 
             public List<Res.UserAvatar> userAvatars;
 
