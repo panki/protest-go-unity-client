@@ -16,6 +16,24 @@ namespace ProtestGoClient
         }
 
         [Serializable]
+        public class Email
+        {
+            public string email;
+        }
+
+        public class ChangeEmail
+        {
+            public string email;
+            public string code;
+        }
+
+        public class Login
+        {
+            public string email;
+            public string code;
+        }
+
+        [Serializable]
         public class CreateUser
         {
             public string unityId;
@@ -25,7 +43,7 @@ namespace ProtestGoClient
     namespace Res
     {
         [Serializable]
-        public class CreateUser
+        public class Login
         {
             public string token;
         }
@@ -84,7 +102,7 @@ namespace ProtestGoClient
             */
             public static IPromise<string> Create()
             {
-                return post<Res.CreateUser>("/users", new Req.CreateUser { unityId = deviceId })
+                return post<Res.Login>("/users", new Req.CreateUser { unityId = deviceId })
                 .Then(res =>
                 {
                     accessToken = res.token;
@@ -115,6 +133,34 @@ namespace ProtestGoClient
                 Req.Nickname req = new Req.Nickname { nickname = nickname };
                 return put<Res.Success>("/users/setNickname", req)
                 .Then(res => res.success);
+            }
+
+            public static IPromise<bool> SendConfirmationCode(string email)
+            {
+                Req.Email req = new Req.Email { email = email };
+                return put<Res.Success>("/users/sendConfirmationCode", req)
+                .Then(res => res.success);
+            }
+
+            public static IPromise<bool> CheckEmail(string email)
+            {
+                Req.Email req = new Req.Email { email = email };
+                return post<Res.Success>("/users/checkEmail", req)
+                .Then(res => res.success);
+            }
+
+            public static IPromise<bool> ChangeEmail(string email, string code)
+            {
+                Req.ChangeEmail req = new Req.ChangeEmail { email = email, code = code };
+                return put<Res.Success>("/users/changeEmail", req)
+                .Then(res => res.success);
+            }
+
+            public static IPromise<string> Login(string email, string code)
+            {
+                Req.Login req = new Req.Login { email = email, code = code };
+                return put<Res.Login>("/users/login", req)
+                .Then(res => res.token);
             }
         }
     }
