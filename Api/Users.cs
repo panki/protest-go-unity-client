@@ -21,33 +21,15 @@ namespace ProtestGoClient
             public string email;
         }
 
-        public class ChangeEmail
+        public class SetEmail
         {
             public string email;
             public string code;
-        }
-
-        public class Login
-        {
-            public string email;
-            public string code;
-        }
-
-        [Serializable]
-        public class CreateUser
-        {
-            public string unityId;
         }
     }
 
     namespace Res
     {
-        [Serializable]
-        public class Login
-        {
-            public string token;
-        }
-
         [Serializable]
         public class UserAvatar
         {
@@ -97,22 +79,6 @@ namespace ProtestGoClient
     {
         public static class Users
         {
-            /*
-            Register - registers new anonymous user,
-            returns access token for future requests.
-            */
-            public static IPromise<string> Create()
-            {
-                return post<Res.Login>("/users", new Req.CreateUser { unityId = deviceId })
-                .Then(res =>
-                {
-                    accessToken = res.token;
-                    return accessToken;
-                });
-            }
-            /*
-            Me - requests current user's information.
-            */
             public static IPromise<Res.User> Me()
             {
                 return get<Res.MeResponse>("/users/me").Then(res =>
@@ -136,13 +102,6 @@ namespace ProtestGoClient
                 .Then(res => res.success);
             }
 
-            public static IPromise<bool> SendConfirmationCode(string email)
-            {
-                Req.Email req = new Req.Email { email = email };
-                return put<Res.Success>("/users/sendConfirmationCode", req)
-                .Then(res => res.success);
-            }
-
             public static IPromise<bool> CheckEmail(string email)
             {
                 Req.Email req = new Req.Email { email = email };
@@ -150,18 +109,18 @@ namespace ProtestGoClient
                 .Then(res => res.success);
             }
 
-            public static IPromise<bool> ChangeEmail(string email, string code)
+            public static IPromise<bool> SetEmail(string email, string code)
             {
-                Req.ChangeEmail req = new Req.ChangeEmail { email = email, code = code };
-                return put<Res.Success>("/users/changeEmail", req)
+                Req.SetEmail req = new Req.SetEmail { email = email, code = code };
+                return put<Res.Success>("/users/setEmail", req)
                 .Then(res => res.success);
             }
 
-            public static IPromise<string> Login(string email, string code)
+            public static IPromise<bool> SendOTP(string email)
             {
-                Req.Login req = new Req.Login { email = email, code = code };
-                return put<Res.Login>("/users/login", req)
-                .Then(res => res.token);
+                Req.Email req = new Req.Email { email = email };
+                return put<Res.Success>("/users/sendOTP", req)
+                .Then(res => res.success);
             }
         }
     }
