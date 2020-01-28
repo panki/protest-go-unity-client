@@ -40,20 +40,20 @@ namespace ProtestGoClient
             {
                 Req.Signup req = new Req.Signup { unityId = deviceId };
                 return post<Res.Login>("/auth/signup", req)
-                .Then(res => setAccessToken(res.token));
+                .Then(res => SetAccessToken(res.token));
             }
 
             public static IPromise<string> Login(string email, string code)
             {
                 Req.Login req = new Req.Login { email = email, code = code };
                 return put<Res.Login>("/auth/login", req)
-                .Then(res => setAccessToken(res.token));
+                .Then(res => SetAccessToken(res.token));
             }
 
             public static IPromise<bool> Logout()
             {
                 return put<Res.Login>("/auth/logout", new Req.Signup { unityId = deviceId })
-                .Then(res => setAccessToken(null))
+                .Then(res => SetAccessToken(null))
                 .Then(res => true);
             }
 
