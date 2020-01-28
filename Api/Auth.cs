@@ -38,15 +38,22 @@ namespace ProtestGoClient
         {
             public static IPromise<string> Signup()
             {
-                return post<Res.Login>("/auth/signup", new Req.Signup { unityId = deviceId })
-                .Then(res => res.token);
+                Req.Signup req = new Req.Signup { unityId = deviceId };
+                return post<Res.Login>("/auth/signup", req)
+                .Then(res => setAccessToken(res.token));
             }
 
             public static IPromise<string> Login(string email, string code)
             {
                 Req.Login req = new Req.Login { email = email, code = code };
                 return put<Res.Login>("/auth/login", req)
-                .Then(res => res.token);
+                .Then(res => setAccessToken(res.token));
+            }
+
+            public static IPromise<nil> Logout()
+            {
+                return post<Res.Login>("/auth/logout", new Req.Signup { unityId = deviceId })
+                .Then(res => setAccessToken(res.token));
             }
 
             public static IPromise<bool> SendOTP(string email)

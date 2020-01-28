@@ -32,9 +32,10 @@ namespace ProtestGoClient
             appSecret = secret;
         }
 
-        public static void SetAccessToken(string token)
+        public static string SetAccessToken(string token)
         {
             accessToken = token;
+            return accessToken;
         }
 
         public static void SetBaseUrl(string url)
