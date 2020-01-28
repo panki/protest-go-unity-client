@@ -50,10 +50,11 @@ namespace ProtestGoClient
                 .Then(res => setAccessToken(res.token));
             }
 
-            public static IPromise<nil> Logout()
+            public static IPromise<bool> Logout()
             {
-                return post<Res.Login>("/auth/logout", new Req.Signup { unityId = deviceId })
-                .Then(res => setAccessToken(res.token));
+                return put<Res.Login>("/auth/logout", new Req.Signup { unityId = deviceId })
+                .Then(res => setAccessToken(null))
+                .Then(res => true);
             }
 
             public static IPromise<bool> SendOTP(string email)
