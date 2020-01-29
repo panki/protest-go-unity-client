@@ -41,6 +41,14 @@ namespace ProtestGoClient
             [System.NonSerialized]
             public Avatar avatar;
         }
+
+        [Serializable]
+        public class Account
+        {
+            public uint real_amount;
+            public uint ingame_amount;
+        }
+
         [Serializable]
         public class User
         {
@@ -48,8 +56,8 @@ namespace ProtestGoClient
             public string nickname;
             public string email;
 
+            public List<Res.Account> account;
             public List<Res.UserAvatar> userAvatars;
-
             public List<Res.Participant> participations;
             public List<Res.Signatory> signatures;
             public List<string> roles; // See UserRole
