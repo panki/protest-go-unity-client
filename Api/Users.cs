@@ -45,8 +45,9 @@ namespace ProtestGoClient
         [Serializable]
         public class Account
         {
-            public uint real_amount;
-            public uint ingame_amount;
+            public uint realAmount;
+            public uint liberoAmount;
+            public uint orderoAmount;
         }
 
         [Serializable]
@@ -56,7 +57,7 @@ namespace ProtestGoClient
             public string nickname;
             public string email;
 
-            public List<Res.Account> account;
+            public Res.Account account;
             public List<Res.UserAvatar> userAvatars;
             public List<Res.Participant> participations;
             public List<Res.Signatory> signatures;
