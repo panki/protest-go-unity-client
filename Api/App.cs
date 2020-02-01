@@ -16,7 +16,9 @@ namespace ProtestGoClient
             public List<uint> allowedProtestTypes;
             public uint maxProtestDuration;
             public uint maxLeafletDuration;
-            public float realExchangeRate;
+            public float real2liberoExchangeRate;
+            public float real2orderoExchangeRate;
+            public List<CatalogItem> purchasesCatalog;
         }
     }
 
