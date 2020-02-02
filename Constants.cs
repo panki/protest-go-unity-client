@@ -13,4 +13,11 @@ namespace ProtestGoClient.Constants
         public static readonly uint ONSELL = 2;
     }
 
+    public static class Currency
+    {
+        public static readonly string REAL = "real";
+        public static readonly string LIBERO = "libero";
+        public static readonly string ORDERO = "ordero";
+    }
+
 }

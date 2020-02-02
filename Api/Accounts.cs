@@ -51,6 +51,16 @@ namespace ProtestGoClient
                 return post<Res.AccountResponse>("/accounts/exchange", req)
                 .Then(res => res.account);
             }
+
+            public static IPromise<Res.Account> ExchangeReal2Libero(uint amount)
+            {
+                return Exchange(Constants.Currency.REAL, Constants.Currency.LIBERO, amount);
+            }
+
+            public static IPromise<Res.Account> ExchangeReal2Ordero(uint amount)
+            {
+                return Exchange(Constants.Currency.REAL, Constants.Currency.ORDERO, amount);
+            }
         }
     }
 }
