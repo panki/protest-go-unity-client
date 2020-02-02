@@ -11,8 +11,11 @@ namespace ProtestGoClient
         // Internal server error (500)
         public class ServerError : System.Exception { }
 
-        // Object not founf (404)
-        public class NotFoundError : System.Exception { }
+        // Object not found (404)
+        public class NotFoundError : System.Exception
+        {
+            public NotFoundError(string message) : base(message) { }
+        }
 
         public class UnauthorizedError : System.Exception { }
 
