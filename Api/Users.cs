@@ -43,14 +43,6 @@ namespace ProtestGoClient
         }
 
         [Serializable]
-        public class Account
-        {
-            public uint realAmount;
-            public uint liberoAmount;
-            public uint orderoAmount;
-        }
-
-        [Serializable]
         public class User
         {
             public string id;
