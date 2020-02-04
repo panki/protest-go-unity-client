@@ -25,6 +25,16 @@ namespace ProtestGoClient
         }
     }
 
+    namespace Req
+    {
+        [Serializable]
+        public class VerifyRequest
+        {
+            public string receipt;
+            public string transactionId;
+        }
+    }
+
     public static partial class Client
     {
         public static class Purchases
@@ -32,6 +42,12 @@ namespace ProtestGoClient
             public static IPromise<List<Res.CatalogItem>> GetCatalog()
             {
                 return get<Res.Catalog>("/purchases/catalog").Then(res => res.catalog);
+            }
+
+            public static IPromise<bool> Verify(string receipt, string transactionId)
+            {
+                Req.VerifyRequest req = new Req.VerifyRequest { receipt = receipt, transactionId = transactionId };
+                return post<Res.Success>("/purchases/verify", req).Then(res => res.success);
             }
         }
     }
