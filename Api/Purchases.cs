@@ -31,7 +31,6 @@ namespace ProtestGoClient
         public class VerifyRequest
         {
             public string receipt;
-            public string transactionId;
         }
     }
 
@@ -44,10 +43,10 @@ namespace ProtestGoClient
                 return get<Res.Catalog>("/purchases/catalog").Then(res => res.catalog);
             }
 
-            public static IPromise<bool> Verify(string receipt, string transactionId)
+            public static IPromise<Res.Account> Verify(string receipt)
             {
-                Req.VerifyRequest req = new Req.VerifyRequest { receipt = receipt, transactionId = transactionId };
-                return post<Res.Success>("/purchases/verify", req).Then(res => res.success);
+                Req.VerifyRequest req = new Req.VerifyRequest { receipt = receipt };
+                return post<Res.AccountResponse>("/purchases/verify", req).Then(res => res.account);
             }
         }
     }
