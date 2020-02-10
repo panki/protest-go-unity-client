@@ -10,18 +10,53 @@ namespace ProtestGoClient
     namespace Res
     {
         [Serializable]
-        public class Init
+        public class ProtestsConfig
         {
-            public string resourcesUrl;
             public List<uint> allowedProtestTypes;
             public uint maxProtestDuration;
             public uint maxPaidByLiberoDuration;
             public float pricePerMinuteInLibero;
             public float pricePerMinuteInReal;
+        }
+
+        [Serializable]
+        public class LeafletsConfig
+        {
             public uint maxLeafletDuration;
             public float real2liberoExchangeRate;
             public float real2orderoExchangeRate;
-            public List<CatalogItem> purchasesCatalog;
+            public uint rewardForCreateInLibero;
+            public uint rewardForSignInLibero;
+            public uint rewardForDestroyInOrdero;
+        }
+
+        [Serializable]
+        public class AccountsConfig
+        {
+            public float real2liberoExchangeRate;
+            public float real2orderoExchangeRate;
+        }
+
+        [Serializable]
+        public class PurchasesConfig
+        {
+            public List<CatalogItem> catalog;
+        }
+
+        [Serializable]
+        public class UrlsConfig
+        {
+            public string resourcesUrl;
+        }
+
+        [Serializable]
+        public class Init
+        {
+            public ProtestsConfig protests;
+            public LeafletsConfig leaflets;
+            public AccountsConfig accounts;
+            public PurchasesConfig purchases;
+            public UrlsConfig urls;
         }
     }
 
