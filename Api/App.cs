@@ -15,6 +15,9 @@ namespace ProtestGoClient
             public string resourcesUrl;
             public List<uint> allowedProtestTypes;
             public uint maxProtestDuration;
+            public uint maxPaidByLiberoDuration;
+            public float pricePerMinuteInLibero;
+            public float pricePerMinuteInReal;
             public uint maxLeafletDuration;
             public float real2liberoExchangeRate;
             public float real2orderoExchangeRate;
