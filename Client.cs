@@ -139,7 +139,15 @@ namespace ProtestGoClient
 
                 switch (err.StatusCode)
                 {
-                    case 400: return new Err.InvalidArgumentsError(res.message != "" ? res.message : res.error);
+                    case 400:
+                        switch (res.error)
+                        {
+                            case "NotEnoughMoneyError": return new Err.NotEnoughMoneyError(res.message);
+                            case "NotFoundError": return new Err.NotFoundError(res.message);
+                            case "InvalidDataError": return new Err.InvalidArgumentsError(res.message);
+                            default:
+                                return new Err.UnknownError(res.message != "" ? res.message : res.error);
+                        }
                     case 401: return new Err.UnauthorizedError();
                     case 404: return new Err.NotFoundError(res.message);
                     case 500: return new Err.ServerError();

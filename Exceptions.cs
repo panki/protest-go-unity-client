@@ -31,6 +31,11 @@ namespace ProtestGoClient
             public InvalidArgumentsError() : base() { }
             public InvalidArgumentsError(string message) : base(message) { }
         }
+
+        public class NotEnoughMoneyError : System.Exception
+        {
+            public NotEnoughMoneyError(string message) : base(message) { }
+        }
     }
 }
 
