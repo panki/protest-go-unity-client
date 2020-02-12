@@ -7,6 +7,16 @@ using System.Collections.Generic;
 
 namespace ProtestGoClient
 {
+    namespace Req
+    {
+        [Serializable]
+        public class BuyAvatar
+        {
+            public string id;
+            public string nickname;
+        }
+    }
+
     namespace Res
     {
 
@@ -49,9 +59,10 @@ namespace ProtestGoClient
                 return get<Res.MarketCatalog>("/market/place/" + placeId.ToString() + "/catalog");
             }
 
-            public static IPromise<Res.BuyAvatar> BuyAvatar(string marketAvatarId)
+            public static IPromise<Res.BuyAvatar> BuyAvatar(string id, string nickname = "")
             {
-                return post<Res.BuyAvatar>("/market/avatar/" + marketAvatarId + "/buy");
+                Req.BuyAvatar req = new Req.BuyAvatar { id = id, nickname = nickname };
+                return post<Res.BuyAvatar>("/market/avatars/buy", req);
             }
         }
     }
