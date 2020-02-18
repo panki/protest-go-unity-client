@@ -52,6 +52,7 @@ namespace ProtestGoClient
             public uint avatarId;
             public string nickname;
             public string userNickname;
+            public Res.Rating rating;
 
             [System.NonSerialized]
             public Avatar avatar;
