@@ -31,6 +31,21 @@ namespace ProtestGoClient
     namespace Res
     {
         [Serializable]
+        public class RatingValue
+        {
+            public uint type; // Protest type id
+            public int value;
+        }
+
+        [Serializable]
+        public class Rating
+        {
+            public int freedom;
+            public int order;
+            public List<RatingValue> ratings;
+        }
+
+        [Serializable]
         public class UserAvatar
         {
             public string id;
@@ -54,6 +69,7 @@ namespace ProtestGoClient
             public List<Res.Participant> participations;
             public List<Res.Signatory> signatures;
             public List<string> roles; // See UserRole
+            public Res.Rating rating;
 
             [SerializeField]
             private string createdAt;
