@@ -22,6 +22,7 @@ namespace ProtestGoClient
             public bool authorized;
             public bool finished;
             public ProtestStatus status;
+            public Res.Rating rating;
 
 
             [SerializeField]
