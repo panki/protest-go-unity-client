@@ -93,6 +93,13 @@ namespace ProtestGoClient
             public User user;
             public Graph graph;
         }
+
+        [Serializable]
+        public class UsersResponse
+        {
+            public List<User> users;
+            public Graph graph;
+        }
     }
 
     public static partial class Client
