@@ -41,7 +41,9 @@ namespace ProtestGoClient
         public class Rating
         {
             public int freedom;
+            public int freedomPos;
             public int order;
+            public int orderPos;
             public List<RatingValue> ratings;
         }
 
