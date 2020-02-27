@@ -19,6 +19,12 @@ namespace ProtestGoClient
 
     namespace Res
     {
+        [Serializable]
+        public class RatingsRank
+        {
+            public string symId;
+            public uint rating;
+        }
 
     }
 

@@ -50,6 +50,13 @@ namespace ProtestGoClient
         }
 
         [Serializable]
+        public class RatingsConfig
+        {
+            public List<RatingsRank> orderRanks;
+            public List<RatingsRank> freedomRanks;
+        }
+
+        [Serializable]
         public class Init
         {
             public ProtestsConfig protests;
@@ -57,6 +64,7 @@ namespace ProtestGoClient
             public AccountsConfig accounts;
             public PurchasesConfig purchases;
             public UrlsConfig urls;
+            public RatingsConfig ratings;
         }
     }
 
