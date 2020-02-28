@@ -35,7 +35,7 @@ namespace ProtestGoClient
             public static IPromise<List<Res.User>> TopFreedomUsers(uint start, uint count)
             {
                 Req.Top req = new Req.Top { start = start, count = count };
-                return post<Res.UsersResponse>("/ratings/topFreedomUsers").Then(res =>
+                return post<Res.UsersResponse>("/ratings/topFreedomUsers", req).Then(res =>
                 {
                     GraphMap g = new GraphMap(res.graph);
                     return g.Users(res.users);
@@ -45,7 +45,7 @@ namespace ProtestGoClient
             public static IPromise<List<Res.User>> TopOrderUsers(uint start, uint count)
             {
                 Req.Top req = new Req.Top { start = start, count = count };
-                return post<Res.UsersResponse>("/ratings/topOrderUsers").Then(res =>
+                return post<Res.UsersResponse>("/ratings/topOrderUsers", req).Then(res =>
                 {
                     GraphMap g = new GraphMap(res.graph);
                     return g.Users(res.users);
