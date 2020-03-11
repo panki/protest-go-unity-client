@@ -54,7 +54,16 @@ namespace ProtestGoClient
             public uint avatarId;
             public string nickname;
             public string userNickname;
+            public uint status;
             public Res.Rating rating;
+
+            [SerializeField]
+            private string statusExpiresAt;
+            public long statusExpiresDt
+            {
+                get { return Utils.str2unixtime(statusExpiresAt); }
+                set { statusExpiresAt = Utils.unixtime2str(value); }
+            }
 
             [System.NonSerialized]
             public Avatar avatar;

@@ -19,6 +19,14 @@ namespace ProtestGoClient.Res
         public bool success;
     }
 
+    public enum UserAvatarStatus : uint
+    {
+        AVAILABLE = 1,
+        PROTESTING = 2,
+        ARRESTED = 3,
+        HOSPITALOZED = 4,
+    }
+
     public enum ProtestStatus : uint
     {
         ACTIVE = 1,
