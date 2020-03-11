@@ -65,6 +65,14 @@ namespace ProtestGoClient
                 set { statusExpiresAt = Utils.unixtime2str(value); }
             }
 
+            [SerializeField]
+            private string statusChangedAt;
+            public long statusChangedDt
+            {
+                get { return Utils.str2unixtime(statusChangedAt); }
+                set { statusChangedAt = Utils.unixtime2str(value); }
+            }
+
             [System.NonSerialized]
             public Avatar avatar;
         }
