@@ -283,7 +283,7 @@ namespace ProtestGoClient
                 {
                     userAvatarId = userAvatarId,
                 };
-                return post<Res.ProtestDisperseResponse>("/protests/" + protestId + "/disperse");
+                return post<Res.ProtestDisperseResponse>("/protests/" + protestId + "/disperse", req);
             }
         }
     }
