@@ -136,6 +136,15 @@ namespace ProtestGoClient
             public Protest protest = null;
             public Graph graph = null;
         }
+
+        [Serializable]
+        public class ProtestDisperseResponse
+        {
+            public Protest protest = null;
+            public UserAvatar userAvatar = null;
+            public uint reward;
+            public uint victimsCount;
+        }
     }
 
     namespace Req
@@ -160,6 +169,11 @@ namespace ProtestGoClient
         }
 
         public class LeaveProtest
+        {
+            public string userAvatarId;
+        }
+
+        public class DisperseProtest
         {
             public string userAvatarId;
         }
@@ -261,15 +275,15 @@ namespace ProtestGoClient
                 });
             }
 
-            public static IPromise<Res.Protest> DisperseProtest(
-                string protestId)
+            public static IPromise<Res.ProtestDisperseResponse> DisperseProtest(
+                string protestId,
+                string userAvatarId)
             {
-                return post<Res.ProtestResponse>("/protests/" + protestId + "/disperse")
-                .Then(res =>
+                Req.DisperseProtest req = new Req.DisperseProtest
                 {
-                    GraphMap g = new GraphMap(res.graph);
-                    return g.Protest(res.protest);
-                });
+                    userAvatarId = userAvatarId,
+                };
+                return post<Res.ProtestDisperseResponse>("/protests/" + protestId + "/disperse");
             }
         }
     }
