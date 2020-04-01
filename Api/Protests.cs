@@ -145,6 +145,13 @@ namespace ProtestGoClient
             public uint reward;
             public uint victimsCount;
         }
+
+        [Serializable]
+        public class ProtestDispersePriceResponse
+        {
+            public uint victimsCount;
+            public Money price;
+        }
     }
 
     namespace Req
@@ -284,6 +291,17 @@ namespace ProtestGoClient
                     userAvatarId = userAvatarId,
                 };
                 return post<Res.ProtestDisperseResponse>("/protests/" + protestId + "/disperse", req);
+            }
+
+            public static IPromise<Res.ProtestDispersePriceResponse> GetDispersePrice(
+                string protestId,
+                string userAvatarId)
+            {
+                Req.DisperseProtest req = new Req.DisperseProtest
+                {
+                    userAvatarId = userAvatarId,
+                };
+                return post<Res.ProtestDispersePriceResponse>("/protests/" + protestId + "/getDispersePrice", req);
             }
         }
     }

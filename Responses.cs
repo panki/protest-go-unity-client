@@ -62,4 +62,10 @@ namespace ProtestGoClient.Res
         public static string DEVELOPER = "developer";
     }
 
+    public static class Money
+    {
+        public uint amount;
+        public string currency;
+    }
+
 }
