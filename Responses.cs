@@ -62,6 +62,7 @@ namespace ProtestGoClient.Res
         public static string DEVELOPER = "developer";
     }
 
+    [Serializable]
     public class Money
     {
         public uint amount;
