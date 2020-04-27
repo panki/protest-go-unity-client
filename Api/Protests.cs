@@ -152,6 +152,12 @@ namespace ProtestGoClient
             public uint victimsCount;
             public Money price;
         }
+
+        [Serializable]
+        public class ProtestShareResponse
+        {
+            public string link;
+        }
     }
 
     namespace Req
@@ -302,6 +308,15 @@ namespace ProtestGoClient
                     userAvatarId = userAvatarId,
                 };
                 return post<Res.ProtestDispersePriceResponse>("/protests/" + protestId + "/getDispersePrice", req);
+            }
+
+            public static IPromise<string> Share(
+                string protestId)
+            {
+                return get<Res.ProtestShareResponse>("/protests/" + protestId + "/share").Then(res =>
+                {
+                    return res.link;
+                });
             }
         }
     }
