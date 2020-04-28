@@ -102,6 +102,18 @@ namespace ProtestGoClient
             return users;
         }
 
+        public Res.UserAvatar UserAvatar(Res.UserAvatar userAvatar)
+        {
+            fillUsersAvatar(userAvatar);
+            return userAvatar;
+        }
+
+        public List<Res.UserAvatar> UserAvatars(List<Res.UserAvatar> userAvatars)
+        {
+            fillUsersAvatars(userAvatars);
+            return userAvatars;
+        }
+
         public Res.Protest Protest(Res.Protest protest)
         {
             fillProtest(protest);

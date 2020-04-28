@@ -26,6 +26,12 @@ namespace ProtestGoClient
             public string email;
             public string code;
         }
+
+        [Serializable]
+        public class SetAvatarType
+        {
+            public uint avatarId;
+        }
     }
 
     namespace Res
@@ -117,6 +123,13 @@ namespace ProtestGoClient
             public List<User> users;
             public Graph graph;
         }
+
+        [Serializable]
+        public class UserAvatarResponse
+        {
+            public UserAvatar userAvatar;
+            public Graph graph;
+        }
     }
 
     public static partial class Client
@@ -165,6 +178,28 @@ namespace ProtestGoClient
                 Req.Email req = new Req.Email { email = email };
                 return put<Res.Success>("/users/sendOTP", req)
                 .Then(res => res.success);
+            }
+
+            public static IPromise<Res.UserAvatar> SetAvatarNickname(string userAvatarId, string nickname)
+            {
+                Req.Nickname req = new Req.Nickname { nickname = nickname };
+                return post<Res.UserAvatarResponse>("/user-avatars/setNickname", req)
+                .Then(res =>
+                {
+                    GraphMap g = new GraphMap(res.graph);
+                    return g.UserAvatar(res.userAvatar);
+                });
+            }
+
+            public static IPromise<Res.UserAvatar> SetAvatarType(string userAvatarId, uint avatarId)
+            {
+                Req.SetAvatarType req = new Req.SetAvatarType { avatarId = avatarId };
+                return post<Res.UserAvatarResponse>("/user-avatars/setType", req)
+                .Then(res =>
+                {
+                    GraphMap g = new GraphMap(res.graph);
+                    return g.UserAvatar(res.userAvatar);
+                });
             }
         }
     }
