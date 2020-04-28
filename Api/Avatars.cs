@@ -17,10 +17,11 @@ namespace ProtestGoClient
             public uint type; // 1 - initial, 2 - onsell
 
             public string sex; // M - male, F - female
+            public string nickname;
         }
 
         [Serializable]
-        public class Avatars
+        public class AvatarsResponse
         {
             public List<Avatar> avatars;
             public Graph graph;
@@ -30,12 +31,18 @@ namespace ProtestGoClient
     {
         public static class Avatars
         {
-            /*
-            GetAll - request all avatars on sale
-            */
             public static IPromise<List<Res.Avatar>> QueryAll()
             {
-                return get<Res.Avatars>("/avatars").Then(res =>
+                return get<Res.AvatarsResponse>("/avatars").Then(res =>
+                {
+                    GraphMap g = new GraphMap(res.graph);
+                    return g.Avatars(res.avatars);
+                });
+            }
+
+            public static IPromise<List<Res.Avatar>> QueryInitial()
+            {
+                return get<Res.AvatarsResponse>("/avatars/initial").Then(res =>
                 {
                     GraphMap g = new GraphMap(res.graph);
                     return g.Avatars(res.avatars);
