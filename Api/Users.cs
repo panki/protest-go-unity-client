@@ -183,7 +183,7 @@ namespace ProtestGoClient
             public static IPromise<Res.UserAvatar> SetAvatarNickname(string userAvatarId, string nickname)
             {
                 Req.Nickname req = new Req.Nickname { nickname = nickname };
-                return post<Res.UserAvatarResponse>("/user-avatars/setNickname", req)
+                return post<Res.UserAvatarResponse>("/user-avatars/" + userAvatarId + "/setNickname", req)
                 .Then(res =>
                 {
                     GraphMap g = new GraphMap(res.graph);
@@ -194,7 +194,7 @@ namespace ProtestGoClient
             public static IPromise<Res.UserAvatar> SetAvatarType(string userAvatarId, uint avatarId)
             {
                 Req.SetAvatarType req = new Req.SetAvatarType { avatarId = avatarId };
-                return post<Res.UserAvatarResponse>("/user-avatars/setType", req)
+                return post<Res.UserAvatarResponse>("/user-avatars/" + userAvatarId + "/setType", req)
                 .Then(res =>
                 {
                     GraphMap g = new GraphMap(res.graph);
