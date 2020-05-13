@@ -14,6 +14,10 @@ namespace ProtestGoClient
         {
             public uint id;
             public string symId;
+            public string country;
+            public string city;
+            public string address;
+            public bool ar;
             public float lat;
             public float lon;
             public uint radius;
