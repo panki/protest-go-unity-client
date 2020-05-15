@@ -227,6 +227,16 @@ namespace ProtestGoClient
                 });
             }
 
+            public static IPromise<List<Res.Participant>> QueryActiveParticipants(string protestId)
+            {
+                return get<Res.ParticipantsResponse>("/protests/" + protestId + "/activeParticipants")
+                .Then(res =>
+                {
+                    GraphMap g = new GraphMap(res.graph);
+                    return g.Participants(res.participants);
+                });
+            }
+
             public static IPromise<Res.Protest> CreateProtest(
                 uint placeId,
                 uint protestTypeId,
