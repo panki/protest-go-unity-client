@@ -57,6 +57,12 @@ namespace ProtestGoClient
         }
 
         [Serializable]
+        public class FeaturesConfig
+        {
+            public bool leafletsEnabled;
+        }
+
+        [Serializable]
         public class Init
         {
             public ProtestsConfig protests;
@@ -65,6 +71,7 @@ namespace ProtestGoClient
             public PurchasesConfig purchases;
             public UrlsConfig urls;
             public RatingsConfig ratings;
+            public FeaturesConfig features;
         }
     }
 
