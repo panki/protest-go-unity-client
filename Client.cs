@@ -11,7 +11,7 @@ namespace ProtestGoClient
     {
 
         // Settings
-        private static string baseUrl = "https://dev.protest-go.com/api/";
+        private static string baseUrl = "https://protest-go.com/api/";
         private static bool debug = false;
 
         // App
