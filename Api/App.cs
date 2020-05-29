@@ -47,6 +47,8 @@ namespace ProtestGoClient
         public class UrlsConfig
         {
             public string resourcesUrl;
+            public string supportEmail;
+            public string supportTelegram;
         }
 
         [Serializable]
