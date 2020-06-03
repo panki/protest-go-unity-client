@@ -2,7 +2,7 @@
   "name": "com.protest-go.protest-go-client",
   "displayName": "Protest GO Unity client",
   "description": "This package is a client library to access protest go server api",
-  "version": "0.0.71",
+  "version": "0.0.72",
   "unity": "2018.3",
   "repository": {
     "type": "git",
