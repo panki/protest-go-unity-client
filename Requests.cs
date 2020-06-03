@@ -10,4 +10,10 @@ namespace ProtestGoClient.Req
     {
         public List<string> ids;
     }
+
+    [Serializable]
+    public class QueryByIntIds
+    {
+        public List<uint> ids;
+    }
 }

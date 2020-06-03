@@ -13,6 +13,7 @@ namespace ProtestGoClient
         public class Graph
         {
             public List<Protest> protests;
+            public List<Participant> participants;
             public List<Leaflet> leaflets;
             public List<User> users;
             public List<UserAvatar> userAvatars;
@@ -24,6 +25,7 @@ namespace ProtestGoClient
     class GraphMap
     {
         private Dictionary<string, Res.Protest> protestsMap;
+        private Dictionary<string, Res.Participant> participantsMap;
         private Dictionary<string, Res.Leaflet> leafletsMap;
         private Dictionary<string, Res.User> usersMap;
         private Dictionary<string, Res.UserAvatar> userAvatarsMap;
@@ -36,6 +38,12 @@ namespace ProtestGoClient
             g.protests.ForEach(p =>
             {
                 protestsMap[p.id] = p;
+            });
+
+            participantsMap = new Dictionary<string, Res.Participant>();
+            g.participants.ForEach(p =>
+            {
+                participantsMap[p.id] = p;
             });
 
             leafletsMap = new Dictionary<string, Res.Leaflet>();
@@ -174,6 +182,18 @@ namespace ProtestGoClient
             return places;
         }
 
+        public Res.Event Event(Res.Event e)
+        {
+            fillEvent(e);
+            return e;
+        }
+
+        public List<Res.Event> Events(List<Res.Event> events)
+        {
+            fillEvents(events);
+            return events;
+        }
+
         private void fillUser(Res.User user)
         {
             fillUsersAvatars(user.userAvatars);
@@ -276,6 +296,23 @@ namespace ProtestGoClient
         private void fillPlaces(List<Res.Place> places)
         {
             places.ForEach(p => fillPlace(p));
+        }
+
+        private void fillEvent(Res.Event e)
+        {
+            if (e.protest == null && protestsMap.ContainsKey(e.protestId))
+            {
+                e.protest = protestsMap[e.protestId];
+            }
+            if (e.participant == null && participantsMap.ContainsKey(e.participantId))
+            {
+                e.participant = participantsMap[e.participantId];
+            }
+        }
+
+        private void fillEvents(List<Res.Event> events)
+        {
+            events.ForEach(e => fillEvent(e));
         }
     }
 }
