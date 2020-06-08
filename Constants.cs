@@ -7,6 +7,22 @@ namespace ProtestGoClient.Constants
         public static readonly uint Protest = 2;
     }
 
+    public static class ProtestStatus
+    {
+        public static readonly uint Active = 1;
+        public static readonly uint Leaved = 2;
+        public static readonly uint Expired = 3;
+        public static readonly uint Dispersed = 4;
+    }
+
+    public static class ParticipantStatus
+    {
+        public static readonly uint Active = 1;
+        public static readonly uint Leaved = 2;
+        public static readonly uint Expired = 3;
+        public static readonly uint Kicked = 4;
+    }
+
     public static class AvatarTypes
     {
         public static readonly uint Initial = 1;
