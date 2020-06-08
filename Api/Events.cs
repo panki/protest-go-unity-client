@@ -18,7 +18,7 @@ namespace ProtestGoClient
             public string userId;
             public string protestId;
             public string participantId;
-            public Res.Rating rating;
+            public Res.RatingValue rating;
             public Res.Money money;
 
             [SerializeField]
