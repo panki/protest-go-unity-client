@@ -54,12 +54,12 @@ namespace ProtestGoClient
 
             public static IPromise<Res.Account> ExchangeReal2Libero(uint amount)
             {
-                return Exchange(Constants.Currency.REAL, Constants.Currency.LIBERO, amount);
+                return Exchange(Constants.Currency.Real, Constants.Currency.Libero, amount);
             }
 
             public static IPromise<Res.Account> ExchangeReal2Ordero(uint amount)
             {
-                return Exchange(Constants.Currency.REAL, Constants.Currency.ORDERO, amount);
+                return Exchange(Constants.Currency.Real, Constants.Currency.Ordero, amount);
             }
         }
     }
