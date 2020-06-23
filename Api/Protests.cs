@@ -142,7 +142,7 @@ namespace ProtestGoClient
         {
             public Protest protest = null;
             public UserAvatar userAvatar = null;
-            public uint reward;
+            public int reward;
             public uint victimsCount;
         }
 
