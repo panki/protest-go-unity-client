@@ -151,6 +151,7 @@ namespace ProtestGoClient
         {
             public uint victimsCount;
             public Money price;
+            public float probability;
         }
 
         [Serializable]
